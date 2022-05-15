@@ -1,5 +1,8 @@
-package todo.java.tdd.exercise;/**
-* @author Ma Peng
-* @date 2022/5/15.
-*/public class TodoCannotReadFileException {
+package todo.java.tdd.exercise;
+
+/**
+ * @author Ma Peng
+ * @date 2022/5/15.
+ */
+public class TodoCannotReadFileException extends RuntimeException {
 }
