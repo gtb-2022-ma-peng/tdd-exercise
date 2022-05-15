@@ -3,7 +3,6 @@ package todo.java.tdd.exercise;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -12,12 +11,13 @@ import java.util.List;
 public class App {
 
     public static void main(String[] args) {
+        System.out.println(Constants.USER_HOME_PATH);
 
     }
 
     public List<String> run() {
         try {
-            return Files.readAllLines(Path.of("E:\\IdeaProjects\\GitHub\\TW-gtb\\step6\\todo-java-tdd-exercise\\.todo\\tasks"), StandardCharsets.UTF_8);
+            return Files.readAllLines(Constants.TASK_FILE_PATH, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new TodoCannotReadFileException();
         }
