@@ -13,4 +13,9 @@ class TaskFactoryTest {
         boolean isCompleted = TaskFactory.createTask(1, "+ task 01").isCompleted();
         Assertions.assertFalse(isCompleted);
     }
+
+    @Test
+    void should_support_name_with_multiple_spaces() {
+        Assertions.assertEquals("   foo   fo  ", TaskFactory.createTask(1, "+    foo   fo  ").getName());
+    }
 }
