@@ -3,8 +3,6 @@ package todo.java.tdd.exercise;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * @author Ma Peng
  * @date 2022/5/16.
