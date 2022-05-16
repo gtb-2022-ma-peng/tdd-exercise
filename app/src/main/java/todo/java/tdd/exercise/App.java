@@ -10,8 +10,7 @@ public class App {
     private final ListCommand listCommand = new ListCommand();
 
     public static void main(String[] args) {
-        System.out.println(Constants.USER_HOME_PATH);
-
+        new App().run().forEach(System.out::println);
     }
 
     public List<String> run() {
