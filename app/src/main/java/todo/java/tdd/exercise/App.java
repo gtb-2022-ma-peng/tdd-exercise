@@ -1,6 +1,5 @@
 package todo.java.tdd.exercise;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,7 +7,7 @@ import java.util.List;
  */
 public class App {
 
-    private final TaskRepository taskRepository = new TaskRepository();
+    private final ListCommand listCommand = new ListCommand();
 
     public static void main(String[] args) {
         System.out.println(Constants.USER_HOME_PATH);
@@ -16,11 +15,7 @@ public class App {
     }
 
     public List<String> run() {
-        List<Task> tasks = taskRepository.loadTasks();
-        List<String> result = new ArrayList<>();
-        result.addAll(Section.tbd().format(tasks));
-        result.addAll(Section.completed().format(tasks));
-        return result;
+        return listCommand.run();
     }
 
 }
