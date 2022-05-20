@@ -12,6 +12,8 @@ import java.util.List;
 
 class AppTest {
 
+    private App app;
+
     @BeforeEach
     void setUp() {
         writeDataFile(List.of(
@@ -19,13 +21,20 @@ class AppTest {
                 "+ task 02",
                 "x task 03",
                 "x task 04"));
+        app = new App();
     }
+
+
 
     @Nested
     class TestList {
         @Test
         void should_list_all_existing_tasks() {
-            List<String> result = new App().run();
+            // Given
+            // When
+            app.run();
+            // Then
+            List<String> result = app.run();
             Assertions.assertEquals(List.of(
                     "# To be done",
                     "1 task 01",
@@ -41,8 +50,11 @@ class AppTest {
     class TestAdd {
         @Test
         void should_add_task_with_single_world_as_name() {
-            new App().run("add", "foobar");
-            List<String> result = new App().run();
+            // Given
+            // When
+            app.run("add", "foobar");
+            // Then
+            List<String> result = app.run();
             Assertions.assertEquals(List.of(
                     "# To be done",
                     "1 task 01",
