@@ -22,7 +22,7 @@ public class TaskRepository {
         try {
             return Files.readAllLines(Constants.TASK_FILE_PATH, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            throw new TodoCannotReadFileException();
+            throw new TodoException();
         }
     }
 
@@ -37,7 +37,7 @@ public class TaskRepository {
             bw.write("+ " + name);
             bw.newLine();
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new TodoException();
         }
     }
 }
