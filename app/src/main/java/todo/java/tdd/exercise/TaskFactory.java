@@ -11,4 +11,8 @@ public class TaskFactory {
         boolean isDeleted = fields[1].equals("-");
         return new Task(id, name, isCompleted, isDeleted);
     }
+
+    static String objectToString(Task task) {
+        return "+ * " + task.getName();
+    }
 }

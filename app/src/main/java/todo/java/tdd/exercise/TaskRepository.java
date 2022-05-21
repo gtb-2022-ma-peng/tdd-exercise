@@ -49,9 +49,9 @@ public class TaskRepository {
     }
 
     private void writeTask(Task task) {
-        String name = task.getName();
         try (BufferedWriter bw = Files.newBufferedWriter(Constants.TASK_FILE_PATH, StandardOpenOption.APPEND)) {
-            bw.write("+ * " + name);
+            String stringLine = TaskFactory.objectToString(task);
+            bw.write(stringLine);
             bw.newLine();
         } catch (IOException e) {
             throw new TodoException();
