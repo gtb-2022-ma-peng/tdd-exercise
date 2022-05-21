@@ -64,6 +64,22 @@ class AppTest {
                     "3 task 03",
                     "4 task 04"), result);
         }
+        @Test
+        void should_add_task_with_multiple_world_as_name() {
+            // Given
+            // When
+            app.run("add", "foobar", "fizz");
+            // Then
+            List<String> result = app.run();
+            Assertions.assertEquals(List.of(
+                    "# To be done",
+                    "1 task 01",
+                    "2 task 02",
+                    "5 foobar fizz",
+                    "# Completed",
+                    "3 task 03",
+                    "4 task 04"), result);
+        }
     }
 
     private void writeDataFile(List<String> lines) {
