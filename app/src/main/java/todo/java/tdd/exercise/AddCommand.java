@@ -6,10 +6,11 @@ import java.util.stream.Stream;
 
 public class AddCommand {
     private final String[] args;
-    final TaskRepository taskRepository = new TaskRepository();
+    final TaskRepository taskRepository;
 
-    public AddCommand(String[] args) {
+    public AddCommand(TaskRepository taskRepository, String... args) {
         this.args = args;
+        this.taskRepository = taskRepository;
     }
 
     List<String> execute() {
