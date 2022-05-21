@@ -1,10 +1,10 @@
 package todo.java.tdd.exercise;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 /**
  * @author Ma Peng
@@ -12,42 +12,31 @@ import java.util.List;
  */
 class AddCommandTest {
 
-    private MyTaskRepository taskRepository;
+    private TaskRepository taskRepository;
 
     @BeforeEach
     void setUp() {
-        taskRepository = new MyTaskRepository();
+        taskRepository = mock(TaskRepository.class);
     }
 
     @Test
     void should_compose_task_name_using_multiple_args() {
-        AddCommand addCommand = new AddCommand(taskRepository, "add", "foobar", "fizz");
+        AddCommand addCommand = createCommandFrom("add", "foobar", "fizz");
 
         addCommand.execute();
 
-        Assertions.assertEquals("foobar fizz", taskRepository.getName());
+        verify(taskRepository).create(new Task(0, "foobar fizz", false));
     }
     @Test
     void should_use_empty_name_when_no_args_provided() {
-        AddCommand addCommand = new AddCommand(taskRepository, "add");
+        AddCommand addCommand = createCommandFrom("add");
 
         addCommand.execute();
 
-        Assertions.assertEquals("", taskRepository.getName());
+        verify(taskRepository).create(new Task(0, "", false));
     }
 
-    private static class MyTaskRepository extends TaskRepository {
-
-        private Task task;
-
-        @Override
-        List<String> create(Task task) {
-            this.task = task;
-            return List.of();
-        }
-
-        public String getName() {
-            return this.task.getName();
-        }
+    private AddCommand createCommandFrom(String...strings) {
+        return new AddCommand(taskRepository, strings);
     }
 }
