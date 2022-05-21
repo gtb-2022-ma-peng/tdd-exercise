@@ -25,6 +25,21 @@ class AppTest {
     }
 
 
+    @Nested
+    class TestRemove {
+        @Test
+        void should_remove_single_task() {
+            app.run("remove", "1");
+            Assertions.assertEquals(List.of(
+                    "# To be done",
+                    "2 task 02",
+                    "# Completed",
+                    "3 task 03",
+                    "4 task 04"), app.run());
+        }
+    }
+
+
 
     @Nested
     class TestList {

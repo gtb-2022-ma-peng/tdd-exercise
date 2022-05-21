@@ -17,6 +17,10 @@ public class App {
             String[] restArgs = Arrays.copyOfRange(args, 1, args.length);
             return new AddCommand(new TaskRepository(), restArgs).execute();
         }
+        if (args.length > 0 && args[0].equals("remove")) {
+            String[] restArgs = Arrays.copyOfRange(args, 1, args.length);
+            return new AddCommand(new TaskRepository(), restArgs).execute();
+        }
         return new ListCommand().run();
     }
 

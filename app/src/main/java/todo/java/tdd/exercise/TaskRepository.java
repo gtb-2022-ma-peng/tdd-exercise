@@ -26,9 +26,8 @@ public class TaskRepository {
         }
     }
 
-    List<String> create(Task task) {
+    public void create(Task task) {
         writeTask(task);
-        return List.of();
     }
 
     private void writeTask(Task task) {
