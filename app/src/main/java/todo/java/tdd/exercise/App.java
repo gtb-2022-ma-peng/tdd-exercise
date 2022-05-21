@@ -1,5 +1,6 @@
 package todo.java.tdd.exercise;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -13,7 +14,8 @@ public class App {
 
     public List<String> run(String...args) {
         if (args.length > 0 && args[0].equals("add")) {
-            return new AddCommand(new TaskRepository(), args).execute();
+            String[] restArgs = Arrays.copyOfRange(args, 1, args.length);
+            return new AddCommand(new TaskRepository(), restArgs).execute();
         }
         return new ListCommand().run();
     }
