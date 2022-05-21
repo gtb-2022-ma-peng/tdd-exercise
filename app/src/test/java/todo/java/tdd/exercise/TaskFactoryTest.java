@@ -16,6 +16,6 @@ class TaskFactoryTest {
 
     @Test
     void should_support_name_with_multiple_spaces() {
-        Assertions.assertEquals("   foo   fo  ", TaskFactory.createTask(1, "+    foo   fo  ").getName());
+        Assertions.assertEquals("   foo   fo  ", TaskFactory.createTask(1, "+ *    foo   fo  ").getName());
     }
 }

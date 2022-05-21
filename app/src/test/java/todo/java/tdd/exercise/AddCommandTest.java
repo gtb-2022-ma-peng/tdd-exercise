@@ -25,7 +25,7 @@ class AddCommandTest {
 
         addCommand.execute();
 
-        verify(taskRepository).create(new Task(0, "foobar fizz", false));
+        verify(taskRepository).create(new Task(0, "foobar fizz", false, false));
     }
     @Test
     void should_use_empty_name_when_no_args_provided() {
@@ -33,7 +33,7 @@ class AddCommandTest {
 
         addCommand.execute();
 
-        verify(taskRepository).create(new Task(0, "", false));
+        verify(taskRepository).create(new Task(0, "", false, false));
     }
 
     private AddCommand createCommandFrom(String...strings) {

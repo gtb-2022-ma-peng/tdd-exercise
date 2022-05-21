@@ -12,15 +12,22 @@ public class App {
         new App().run().forEach(System.out::println);
     }
 
-    public List<String> run(String...args) {
-        if (args.length > 0 && args[0].equals("add")) {
-            String[] restArgs = Arrays.copyOfRange(args, 1, args.length);
+    public List<String> run(String... args) {
+
+        if (args.length <= 0) {
+            return new ListCommand().run();
+        }
+
+        String[] restArgs = Arrays.copyOfRange(args, 1, args.length);
+
+        if (args[0].equals("add")) {
             return new AddCommand(new TaskRepository(), restArgs).execute();
         }
-        if (args.length > 0 && args[0].equals("remove")) {
-            String[] restArgs = Arrays.copyOfRange(args, 1, args.length);
-            return new AddCommand(new TaskRepository(), restArgs).execute();
+
+        if (args[0].equals("remove")) {
+            return new RemoveCommand(new TaskRepository(), restArgs).execute();
         }
+
         return new ListCommand().run();
     }
 

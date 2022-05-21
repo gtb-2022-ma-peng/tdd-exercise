@@ -17,10 +17,10 @@ class AppTest {
     @BeforeEach
     void setUp() {
         writeDataFile(List.of(
-                "+ task 01",
-                "+ task 02",
-                "x task 03",
-                "x task 04"));
+                "+ * task 01",
+                "+ * task 02",
+                "x * task 03",
+                "x * task 04"));
         app = new App();
     }
 
