@@ -3,10 +3,13 @@ package todo.java.tdd.exercise;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListCommand {
-    final TaskRepository taskRepository = new TaskRepository();
+public class ListCommand extends Command{
 
-    List<String> run() {
+    public ListCommand(TaskRepository taskRepository) {
+        super(taskRepository);
+    }
+
+    List<String> execute() {
         List<Task> tasks = taskRepository.all();
         List<String> result = new ArrayList<>();
         result.addAll(Section.tbd().format(tasks));

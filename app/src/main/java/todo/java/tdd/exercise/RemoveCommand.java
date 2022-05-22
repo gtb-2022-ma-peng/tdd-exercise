@@ -8,15 +8,15 @@ import java.util.stream.Collectors;
  * @author Ma Peng
  * @date 2022/5/21.
  */
-public class RemoveCommand {
-    private final TaskRepository taskRepository;
+public class RemoveCommand extends Command {
     private final String[] args;
 
     public RemoveCommand(TaskRepository taskRepository, String...args) {
-        this.taskRepository = taskRepository;
+        super(taskRepository);
         this.args = args;
     }
 
+    @Override
     public List<String> execute() {
         List<Integer> ids = Arrays.stream(args).map(Integer::valueOf).collect(Collectors.toList());
         taskRepository.all().stream()

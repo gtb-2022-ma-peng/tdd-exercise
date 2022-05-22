@@ -34,7 +34,7 @@ class AppTest {
                         "2 task 02",
                         "# Completed",
                         "3 task 03",
-                        "4 task 04"), app.run());
+                        "4 task 04"), app.run("list"));
             }
         }
         @Nested
@@ -46,7 +46,7 @@ class AppTest {
                         "# To be done",
                         "2 task 02",
                         "# Completed",
-                        "4 task 04"), app.run());
+                        "4 task 04"), app.run("list"));
             }
         }
     }
@@ -59,9 +59,8 @@ class AppTest {
         void should_list_all_existing_tasks() {
             // Given
             // When
-            app.run();
+            List<String> result = app.run("list");
             // Then
-            List<String> result = app.run();
             Assertions.assertEquals(List.of(
                     "# To be done",
                     "1 task 01",
@@ -81,7 +80,7 @@ class AppTest {
             // When
             app.run("add", "foobar");
             // Then
-            List<String> result = app.run();
+            List<String> result = app.run("list");
             Assertions.assertEquals(List.of(
                     "# To be done",
                     "1 task 01",
@@ -97,7 +96,7 @@ class AppTest {
             // When
             app.run("add", "foobar", "fizz");
             // Then
-            List<String> result = app.run();
+            List<String> result = app.run("list");
             Assertions.assertEquals(List.of(
                     "# To be done",
                     "1 task 01",
