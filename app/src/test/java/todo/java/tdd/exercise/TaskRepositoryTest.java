@@ -19,7 +19,7 @@ class TaskRepositoryTest {
         taskRepository.delete(1);
         taskRepository.delete(3);
 
-        List<Task> result = taskRepository.loadTasks();
+        List<Task> result = taskRepository.all();
 
         assertEquals(List.of(
                 new Task(2, "task 02", false, false),

@@ -13,12 +13,11 @@ public class TaskRepository {
 
     private final TaskMarshaller taskMarshaller = new TaskMarshaller();
 
-    List<Task> loadTasks() {
-        List<Task> tasks = loadAllTasks();
-        return tasks.stream().filter(task -> !task.isDeleted()).collect(Collectors.toList());
+    List<Task> all() {
+        return loadTasks().stream().filter(task -> !task.isDeleted()).collect(Collectors.toList());
     }
 
-    private List<Task> loadAllTasks() {
+    private List<Task> loadTasks() {
         List<String> lines = readTaskLines();
         List<Task> tasks = new ArrayList<>();
         for (int i = 0; i < lines.size(); i++) {
@@ -38,15 +37,16 @@ public class TaskRepository {
     public void create(Task task) {
         writeTask(task);
     }
+
     public void delete(Integer id) {
-        List<Task> tasks = loadAllTasks();
+        List<Task> tasks = loadTasks();
         tasks.stream().filter(task -> task.getId() == id).forEach(Task::deleted);
 
         try (BufferedWriter bw = Files.newBufferedWriter(Constants.TASK_FILE_PATH)) {
             for (Task task : tasks) {
                 String completedSign = task.isCompleted() ? "x" : "+";
                 String deletedSign = task.isDeleted() ? "-" : "*";
-                bw.write( completedSign + " " + deletedSign + " " + task.getName());
+                bw.write(completedSign + " " + deletedSign + " " + task.getName());
                 bw.newLine();
 
             }
