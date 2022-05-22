@@ -6,6 +6,20 @@ public class Task {
     private final int id;
     private final String name;
     private final boolean isCompleted;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return id == task.id && isCompleted == task.isCompleted && isDeleted == task.isDeleted && Objects.equals(name, task.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, isCompleted, isDeleted);
+    }
+
     private boolean isDeleted;
 
     public Task(int id, String name, boolean isCompleted, boolean isDeleted) {
@@ -38,19 +52,6 @@ public class Task {
                 ", name='" + name + '\'' +
                 ", isCompleted=" + isCompleted +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Task task = (Task) o;
-        return id == task.id && isCompleted == task.isCompleted && Objects.equals(name, task.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, isCompleted);
     }
 
 

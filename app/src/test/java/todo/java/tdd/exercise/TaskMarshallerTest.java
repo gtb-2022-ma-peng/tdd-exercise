@@ -28,6 +28,12 @@ class TaskMarshallerTest {
     void should_marshal_to_plain_text(String line, Task task) {
         Assertions.assertEquals(line, taskMarshaller.marshal(task));
     }
+
+    @ParameterizedTest
+    @MethodSource("lines_and_tasks")
+    void should_unmarshal_to_plain_text(String line, Task task) {
+        Assertions.assertEquals(task, taskMarshaller.unmarshal(0, line));
+    }
     public static Stream<Arguments> lines_and_tasks() {
         return Stream.of(
                 Arguments.of("+ * task 01", new Task(0, "task 01", false, false)),
