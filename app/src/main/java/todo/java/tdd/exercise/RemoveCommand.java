@@ -2,6 +2,7 @@ package todo.java.tdd.exercise;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Ma Peng
@@ -17,7 +18,10 @@ public class RemoveCommand {
     }
 
     public List<String> execute() {
-        Arrays.stream(args).map(Integer::valueOf).forEach(this.taskRepository::delete);
+        List<Integer> ids = Arrays.stream(args).map(Integer::valueOf).collect(Collectors.toList());
+        taskRepository.all().stream()
+                .filter(task -> ids.contains(task.getId()))
+                .forEach(task -> taskRepository.delete(task.getId()));
         return List.of();
     }
 }
