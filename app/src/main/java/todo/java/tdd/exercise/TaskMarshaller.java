@@ -11,6 +11,8 @@ public class TaskMarshaller {
     }
 
     String marshal(Task task) {
-        return "+ * " + task.getName();
+        String completedSign = task.isCompleted() ? "x" : "+";
+        String deletedSigon = task.isDeleted() ? "-" : "*";
+        return completedSign + " " + deletedSigon + " " + task.getName();
     }
 }

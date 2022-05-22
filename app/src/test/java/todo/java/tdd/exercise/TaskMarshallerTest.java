@@ -31,6 +31,7 @@ class TaskMarshallerTest {
     public static Stream<Arguments> lines_and_tasks() {
         return Stream.of(
                 Arguments.of("+ * task 01", new Task(0, "task 01", false, false)),
+                Arguments.of("x * task 01", new Task(0, "task 01", true, false)),
                 Arguments.of("+ *    foo   fo  ", new Task(0, "   foo   fo  ", false, false))
         );
     }
