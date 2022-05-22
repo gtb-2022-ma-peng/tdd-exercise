@@ -11,7 +11,12 @@ public class CommandFactory {
         String commandName = args[0];
         String[] restArgs = Arrays.copyOfRange(args, 1, args.length);
 
-        Command command = new ListCommand(taskRepository);
+        Command command = new UnknownCommand(taskRepository, commandName);
+
+        if (commandName.equals("list")) {
+            command = new ListCommand(taskRepository);
+        }
+
         if (commandName.equals("add")) {
             command = new AddCommand(taskRepository, restArgs);
         }
@@ -19,6 +24,7 @@ public class CommandFactory {
         if (commandName.equals("remove")) {
             command = new RemoveCommand(taskRepository, restArgs);
         }
+
         return command;
     }
 }

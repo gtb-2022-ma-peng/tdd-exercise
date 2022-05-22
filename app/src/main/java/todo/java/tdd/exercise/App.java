@@ -13,7 +13,7 @@ public class App {
         new App().run("list").forEach(System.out::println);
     }
 
-    public List<String> run(String... args) {
+    public List<String> run(String ... args) {
 
         if (args.length <= 0) {
             throw new TodoException();

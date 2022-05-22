@@ -51,6 +51,18 @@ class AppTest {
         }
     }
 
+    @Nested
+    class UnknownTest {
+        @Nested
+        class WhenCmdNameUnknownTest {
+            @Test
+            void should_give_hint() {
+                List<String> result = app.run("foobar");
+                Assertions.assertEquals(List.of("Unknown command: foobar!"), result);
+            }
+        }
+    }
+
 
 
     @Nested
