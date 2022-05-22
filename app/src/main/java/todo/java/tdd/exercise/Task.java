@@ -5,28 +5,15 @@ import java.util.Objects;
 public class Task {
     private final int id;
     private final String name;
-    private final boolean isCompleted;
+    private final boolean completed;
+    private boolean deleted;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Task task = (Task) o;
-        return id == task.id && isCompleted == task.isCompleted && isDeleted == task.isDeleted && Objects.equals(name, task.name);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, isCompleted, isDeleted);
-    }
-
-    private boolean isDeleted;
-
-    public Task(int id, String name, boolean isCompleted, boolean isDeleted) {
+    public Task(int id, String name, boolean completed, boolean isDeleted) {
         this.id = id;
         this.name = name;
-        this.isCompleted = isCompleted;
-        this.isDeleted = isDeleted;
+        this.completed = completed;
+        this.deleted = isDeleted;
     }
 
     public int getId() {
@@ -42,7 +29,28 @@ public class Task {
     }
 
     public boolean isCompleted() {
-        return this.isCompleted;
+        return this.completed;
+    }
+
+    public boolean isDeleted() {
+        return this.deleted;
+    }
+
+    public void deleted() {
+        this.deleted = true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return id == task.id && completed == task.completed && deleted == task.deleted && Objects.equals(name, task.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, completed, deleted);
     }
 
     @Override
@@ -50,16 +58,8 @@ public class Task {
         return "Task{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", isCompleted=" + isCompleted +
+                ", completed=" + completed +
+                ", deleted=" + deleted +
                 '}';
-    }
-
-
-    public boolean isDeleted() {
-        return this.isDeleted;
-    }
-
-    public void deleted() {
-        this.isDeleted = true;
     }
 }
