@@ -10,11 +10,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TaskRepository {
+
+    private final TaskMarshaller taskMarshaller = new TaskMarshaller();
+
     List<Task> loadTasks() {
         List<String> lines = readTaskLines();
         List<Task> tasks = new ArrayList<>();
         for (int i = 0; i < lines.size(); i++) {
-            tasks.add(TaskFactory.createTask(i + 1, lines.get(i)));
+            tasks.add(taskMarshaller.unmarshal(i + 1, lines.get(i)));
         }
         return tasks.stream().filter(task -> !task.isDeleted()).collect(Collectors.toList());
     }
@@ -32,7 +35,7 @@ public class TaskRepository {
     }
     public void delete(Integer id) {
         List<Task> tasks = loadTasks();
-        tasks.stream().filter(task -> task.getId() == id).forEach(task -> task.deleted());
+        tasks.stream().filter(task -> task.getId() == id).forEach(Task::deleted);
 
         try (BufferedWriter bw = Files.newBufferedWriter(Constants.TASK_FILE_PATH)) {
             for (Task task : tasks) {
@@ -50,7 +53,7 @@ public class TaskRepository {
 
     private void writeTask(Task task) {
         try (BufferedWriter bw = Files.newBufferedWriter(Constants.TASK_FILE_PATH, StandardOpenOption.APPEND)) {
-            String stringLine = TaskFactory.objectToString(task);
+            String stringLine = taskMarshaller.marshal(task);
             bw.write(stringLine);
             bw.newLine();
         } catch (IOException e) {
